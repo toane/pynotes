@@ -6,6 +6,15 @@ Format an integer to hexadecimal representation
 '0xFE'
 """
 ```
+Build a dict using comprehensions
+```python
+normal_size = ['m','l','s']
+bigger = {a : 'x' + a for a in normal_size}
+print(bigger)
+"""
+{'m': 'xm', 'l': 'xl', 's': 'xs'}
+"""
+```
 
 Use setter and getter decorators
 ```python
