@@ -1,3 +1,12 @@
+Format an integer to hexadecimal representation
+```python
+"0x{:02X}".format(254)
+
+"""
+'0xFE'
+"""
+```
+
 Use setter and getter decorators
 ```python
 class Animal(object):
@@ -83,6 +92,22 @@ class PlayMock(object):
 
 PlayMock().test_get_api()
 ```
+Build an url
+```python
+from urllib.parse import urlunparse
+scheme = "http"
+domain = "www.barney.ru"
+port = 80
+ext = "/auth/users/login"
+r = urlunparse((scheme, '%s:%d' % (domain, port), ext, 'user', 'admin', 'anchor3'))
+print(r)
+
+"""
+http://www.barney.ru:80/auth/users/login;user?admin#anchor3
+"""
+
+```
+
 ## Cryptography ##
 Encrypt/decrypt a message
 ```python
