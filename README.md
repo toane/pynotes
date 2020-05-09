@@ -4,11 +4,11 @@ class Animal(object):
     def __init__(self, weight):
         self._weight = weight
         print("that raccoon weights",weight,"kgs")
-    
+
     @property
     def weight(self):
         return self._weight
-    
+
     @weight.setter
     def weight(self, value):
         diff = value - self._weight
@@ -18,7 +18,7 @@ class Animal(object):
             print("that racoon lost", abs(diff),"kgs")
         print("now it's",value,"kgs")
         self._weight = value
-        
+
 racoon = Animal(10)
 racoon.weight = 8
 
@@ -59,7 +59,7 @@ from typing import List, Dict, Tuple
 import attr
 
 class PlayMock(object):
-        
+
     def get_api(self, url:str="https://blank.org", data:Dict) -> Dict:
         """
         call an url with the given data
@@ -71,7 +71,7 @@ class PlayMock(object):
         content = stk.text
         print("content was %s" % content)
         return stk.json()
-        
+
     @patch("requests.get")
     def test_get_api(self, mock_req_get):
         obj = {"olives": "several", "skying": ["fast", "not fast"]}
@@ -80,10 +80,60 @@ class PlayMock(object):
         scam = self.get_api("http://friendoptions.net", data={"best_friend": "dog"})
         assert "olives" in scam.keys()
 
-    
+
 PlayMock().test_get_api()
+```
+## Cryptography ##
+Encrypt/decrypt a message
+```python
+from Crypto.Cipher import PKCS1_OAEP
+from Crypto.PublicKey import RSA
+"""
+generate a private key:
+openssl genrsa -out private.pem 1024
+derive the public key
+openssl rsa -in private.pem -outform PEM -pubout -out public.pem
+"""
+
+# message  = b"e24652949e9d317e49da842b6b651cca098be3a6819e45ddcb518873f890f5a9"
+message  = "Du café pour la maternité".encode('utf-8')
+
+with open("private.pem","rb") as kf:
+    pkeys = kf.read()
+    pvkey = RSA.importKey(pkeys)
+
+with open("message.enc","wb") as wr:
+    key = RSA.importKey(open('public.pem').read())
+    cipher = PKCS1_OAEP.new(key)
+    ciphertext = cipher.encrypt(message)
+    wr.write(ciphertext)
+
+with open("message.enc","rb") as wo:
+    ciphertext = wo.read()
+    decipher = PKCS1_OAEP.new(pvkey)
+    msg = decipher.decrypt(ciphertext).decode('utf-8')
+    print(msg)
 
 ```
+Stream through a huge file to compute its checksum
+```python
+import hashlib
+def get_fingerprint(file) -> str:
+    h256 = hashlib.sha256()
+    BUF_SIZE = 65536
+    with open(file, "rb") as f:
+        while True:
+            data = f.read(BUF_SIZE)
+            if not data:
+                break
+            h256.update(data)
+
+    return h256.hexdigest()
+
+r = get_fingerprint("one_big_file.exe")
+print(r)
+```
+
 ## Pandas ##
 Apply a method to each element in a DataFrame to create a new column
 ```python
