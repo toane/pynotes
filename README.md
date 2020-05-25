@@ -1,3 +1,16 @@
+Use namedtuples
+```python
+from collections import namedtuple
+Appliance = namedtuple('Appliance', ['designation','voltage', 'weight', 'domain'])
+bld = Appliance('blender', 220, 3, 'the kitchen')
+print(bld)
+print(bld[1])
+"""
+Appliance(designation='blender', voltage=220, weight=3, domain='the kitchen')
+220
+"""
+```
+
 Format an integer to hexadecimal representation
 ```python
 "0x{:02X}".format(254)
