@@ -1,3 +1,9 @@
+Get a timestamp for now
+```python
+from datetime import datetime
+now = int(datetime.now().timestamp())
+```
+
 Use namedtuples
 ```python
 from collections import namedtuple
