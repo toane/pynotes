@@ -133,7 +133,15 @@ print(r)
 """
 http://www.barney.ru:80/auth/users/login;user?admin#anchor3
 """
-
+```
+Deconstruct an url
+```python
+from urllib.parse import urlparse
+a = urlparse('http://www.barley.fr/tarpaulin/ermin.php3?action=have_pizza#now')
+print(a)
+"""
+ParseResult(scheme='http', netloc='www.barley.fr', path='/tarpaulin/ermin.php3', params='', query='action=have_pizza', fragment='now')
+"""
 ```
 
 ## Cryptography ##
